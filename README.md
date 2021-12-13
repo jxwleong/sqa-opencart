@@ -10,3 +10,7 @@
 3. Copy the upload folder of OpenCart to **C:\xampp\htdocs\upload**.
 
 4. Enable GD Extension, removed `;` of `;extension=gd` at  **C:\xampp\php\php.ini**
+
+5. Chrome Webdriver. <https://chromedriver.chromium.org/downloads>  
+   - Make sure version matched with chrome browser.
+   - Extract the executable `chromedriver.exe` and add it to the PATH environment variable.
