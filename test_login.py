@@ -26,7 +26,7 @@ class TestRegistration(unittest.TestCase):
     def test_open_login_page(self):
         self.assertEqual("Account Login", self.driver.title)
 
-    def test_login_given_invalid_account_expect_fail(self):
+    def test_login_given_wrong_email_and_password_expect_fail(self):
         self.email.send_keys("fake.account@test.com")
         self.password.send_keys("fakepass")
 
@@ -41,8 +41,37 @@ class TestRegistration(unittest.TestCase):
         except:
             raise Exception("Expecting alert 'Warning: No match for E-Mail Address and/or Password.'")
 
+    def test_login_given_correct_email_wrong_password_expect_fail(self):
+        self.email.send_keys("john.doe123@test.com")
+        self.password.send_keys("fakepass")
 
-    def test_register_given_registered_account_expect_pass(self):
+        self.login.click()
+
+        try:
+            alert = self.driver.find_element_by_xpath("//*[@id='account-login']/div[1]")
+            alert_message = alert.text
+            self.assertIsNotNone(alert)
+            self.assertEqual("Warning: No match for E-Mail Address and/or Password.", alert_message)
+            #print(inspect.currentframe().f_code.co_name)
+        except:
+            raise Exception("Expecting alert 'Warning: No match for E-Mail Address and/or Password.'")
+
+    def test_login_given_wrong_email_correct_password_expect_fail(self):
+        self.email.send_keys("fake.account@test.com")
+        self.password.send_keys("123456")
+
+        self.login.click()
+
+        try:
+            alert = self.driver.find_element_by_xpath("//*[@id='account-login']/div[1]")
+            alert_message = alert.text
+            self.assertIsNotNone(alert)
+            self.assertEqual("Warning: No match for E-Mail Address and/or Password.", alert_message)
+            #print(inspect.currentframe().f_code.co_name)
+        except:
+            raise Exception("Expecting alert 'Warning: No match for E-Mail Address and/or Password.'")
+            
+    def test_register_given_correct_email_and_password_expect_pass(self):
         self.email.send_keys("john.doe123@test.com")
         self.password.send_keys("123456")
 
