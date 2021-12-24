@@ -13,7 +13,7 @@ login_page_url = "https://demo.opencart.com/index.php?route=account/login"
 
 
 
-class TestRegistration(unittest.TestCase):
+class TestLogin(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path="chromedriver.exe")
         self.driver.get(login_page_url)
