@@ -35,7 +35,7 @@ class TestOrder(unittest.TestCase):
         self.latest_order_id_xpath = "//*[@id='form-order']/table/tbody/tr[1]/td[2]"
 
 
-    def test_read_latest_order_it_expect_14530(self):
+    def test_read_latest_order_it_expect_numeric_string(self):
         self.login.click()
         
         order_page_url = self.driver.find_element_by_xpath(self.total_orders_url_xpath).get_attribute("href")
@@ -43,7 +43,8 @@ class TestOrder(unittest.TestCase):
         self.assertEqual("Orders", self.driver.title)
 
         latest_order_id = self.driver.find_element_by_xpath(self.latest_order_id_xpath).text
-        self.assertEqual("14530", latest_order_id)
+        self.assertTrue(latest_order_id.isnumeric())
+
 
 if __name__ == "__main__":
     unittest.main()

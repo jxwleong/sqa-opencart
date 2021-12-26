@@ -56,10 +56,10 @@ class TestAdminLoginDashboard(unittest.TestCase):
         self.assertEqual("11.4M", total_sales)
 
 
-    def test_read_total_customers_expect_134dot6_K(self):
+    def test_read_total_customers_expect_134dot7_K(self):
         self.login.click()
         total_customers = self.driver.find_element_by_xpath(self.total_customers_number_xpath).text
-        self.assertEqual("134.6K", total_customers)
+        self.assertEqual("134.7K", total_customers)
 
 
     def tearDown(self):

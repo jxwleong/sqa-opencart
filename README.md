@@ -1,5 +1,7 @@
 # SQA Opencart
 
+Run at directory of this repo: `python -m unittest discover .`
+
 ## Setup
 
 1. OpenCart, <https://github.com/opencart/opencart>

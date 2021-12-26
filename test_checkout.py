@@ -72,7 +72,7 @@ class TestCheckout(unittest.TestCase):
         self.country_select.select_by_index(1)
         self.region_select.select_by_index(1)
 
-    @unittest.skip
+    #@unittest.skip
     def test_checkout_invalid_item_expect_error_message(self):
         self.login()
 
@@ -96,7 +96,7 @@ class TestCheckout(unittest.TestCase):
         except:
             raise Exception("Expecting message 'Products marked with *** are not available in the desired quantity or not in stock!' ")
 
-    def test_checkout_invalid_item_expect_error_message(self):
+    def test_checkout_valid_item_expect_pass(self):
         self.login()
         
         self.driver.get(self.hp_lp3065_url)
@@ -115,21 +115,27 @@ class TestCheckout(unittest.TestCase):
                 remove_button.click()
         except:  # pass, no invalid item in the shopping cart
             pass
-
+        
+        time.sleep(1)  # Need this else wont checkout..
         self.checkout_button_url = self.driver.find_element_by_xpath(self.checkout_button_xpath).get_attribute("href")
         self.driver.get(self.checkout_button_url)
         #time.sleep(5)
         #self.checkout_fill_billing_details() SKip because already set for the account login
         continue_ = self.driver.find_element_by_xpath(self.checkout_step2_continue_xpath)
         continue_.click()
+        time.sleep(1) 
         continue_ = self.driver.find_element_by_xpath(self.checkout_step3_continue_xpath)
         continue_.click()
+        time.sleep(1) 
         continue_ = self.driver.find_element_by_xpath(self.checkout_step4_continue_xpath)
         continue_.click()
+        time.sleep(1) 
         checkbox = self.driver.find_element_by_xpath(self.checkout_step5_checkbox_xpath)
         checkbox.click()
+        time.sleep(1) 
         continue_ = self.driver.find_element_by_xpath(self.checkout_step5_continue_xpath)
         continue_.click()
+        time.sleep(1) 
         confirm = self.driver.find_element_by_xpath(self.checkout_step6_confirm_order_xpath)
         confirm.click()
         time.sleep(5) # Delay needed for the final page to be fully loaded
