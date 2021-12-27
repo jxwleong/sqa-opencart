@@ -16,7 +16,7 @@ product_2_url = "https://demo.opencart.com/index.php?route=product/product&path=
 #driver.get(homepage_url)
 
 
-class TestCart(unittest.TestCase):
+class TestCompare(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path="chromedriver.exe")
         self.driver.implicitly_wait(5) # seconds, Ref: https://selenium-python.readthedocs.io/waits.html#implicit-waits
@@ -70,7 +70,8 @@ class TestCart(unittest.TestCase):
         self.add_to_cart_button = self.driver.find_element_by_xpath(self.add_to_cart_button_xpath)
         self.add_to_cart_button.click()   # Add to cart.
         self.driver.get(self.shopping_cart_url)
-
+        
+        time.sleep(1)
         self.assertEqual(self.driver.title, "Shopping Cart")
 
         self.shopping_cart_hp_lp3065 = self.driver.find_element_by_xpath(self.shopping_cart_hp_lp3065_xpath)

@@ -15,7 +15,7 @@ pound_symbol = "£"
 dollar_symbol = "$"
 
 
-class TestRegistration(unittest.TestCase):
+class TestCurrency(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path="chromedriver.exe")
         self.driver.get(homepage_url)

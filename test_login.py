@@ -71,7 +71,7 @@ class TestLogin(unittest.TestCase):
         except:
             raise Exception("Expecting alert 'Warning: No match for E-Mail Address and/or Password.'")
             
-    def test_register_given_correct_email_and_password_expect_pass(self):
+    def test_login_given_correct_email_and_password_expect_pass(self):
         self.email.send_keys("john.doe123@test.com")
         self.password.send_keys("123456")
 

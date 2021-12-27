@@ -13,6 +13,7 @@ from selenium.common.exceptions import NoAlertPresentException
 import inspect
 import unittest
 import time
+import math
 
 # Constant variable
 admin_login_page_url = "https://demo.opencart.com/admin/"
@@ -56,10 +57,17 @@ class TestAdminLoginDashboard(unittest.TestCase):
         self.assertEqual("11.4M", total_sales)
 
 
-    def test_read_total_customers_expect_134dot7_K(self):
+    def test_read_total_customers_expect_close_to_134dot7_K(self):
         self.login.click()
         total_customers = self.driver.find_element_by_xpath(self.total_customers_number_xpath).text
-        self.assertEqual("134.7K", total_customers)
+        #self.assertEqual("134.7K", total_customers)
+        # Strip the K
+        total_customers_without_unit = total_customers[:-1]
+        # Set tolerance 20 incase in the future increase more..
+        total_customers_close_to_134dot7 = math.isclose(134.7, float(total_customers_without_unit), abs_tol=20)
+        self.assertTrue(total_customers_close_to_134dot7)
+        # Use contain number instead as the number keep changing..
+        # Maybe due to more ppl using the admin/user demo site
 
 
     def tearDown(self):

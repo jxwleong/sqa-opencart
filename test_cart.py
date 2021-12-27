@@ -31,6 +31,7 @@ class TestCart(unittest.TestCase):
 
         # Must be in shopping cart page
         self.shopping_cart_first_product_quantity_xpath = "//*[@id='content']/form/div/table/tbody/tr/td[4]/div/input"
+        self.shopping_cart_not_in_stock_or_quantity_not_available_xpath = "//*[@id='checkout-cart']/div[1]"
    
     def test_add_cart_with_default_quantity_one(self):
         url = self.all_laptops_page.get_attribute("href")
@@ -44,6 +45,7 @@ class TestCart(unittest.TestCase):
         self.add_to_cart_button = self.driver.find_element_by_xpath(self.add_to_cart_button_xpath)
         self.add_to_cart_button.click()   # Add to cart.
 
+        time.sleep(1)
         self.driver.get(self.shopping_cart_url)
         # Need to be in shopping cart first to extract this data
         self.shopping_cart_hp_lp3065 = self.driver.find_element_by_xpath(self.shopping_cart_hp_lp3065_xpath)
@@ -56,8 +58,8 @@ class TestCart(unittest.TestCase):
         self.assertEqual("1", shopping_cart_first_product_quantity)
 
 
-    def test_add_cart_with_quantity_of_ten(self):
-        new_quantity = 10
+    def test_add_cart_with_large_quantity(self):
+        new_quantity = 999999999999999999
         url = self.all_laptops_page.get_attribute("href")
         self.driver.get(url)
         self.assertEqual(self.driver.title, "Laptops & Notebooks")
@@ -73,7 +75,8 @@ class TestCart(unittest.TestCase):
 
         self.add_to_cart_button = self.driver.find_element_by_xpath(self.add_to_cart_button_xpath)
         self.add_to_cart_button.click()   # Add to cart.
-
+        
+        time.sleep(1)
         self.driver.get(self.shopping_cart_url)
         # Need to be in shopping cart first to extract this data
         self.shopping_cart_hp_lp3065 = self.driver.find_element_by_xpath(self.shopping_cart_hp_lp3065_xpath)
@@ -83,8 +86,13 @@ class TestCart(unittest.TestCase):
 
         # Assume only one product which is HP LP3065 at shopping cart!
         shopping_cart_first_product_quantity = self.driver.find_element_by_xpath(self.shopping_cart_first_product_quantity_xpath).get_attribute("value")
-        self.assertEqual("10", shopping_cart_first_product_quantity)
+        # Max value = 2147483647
+        self.assertEqual("2147483647", shopping_cart_first_product_quantity)
 
+        alert = self.driver.find_element_by_xpath(self.shopping_cart_not_in_stock_or_quantity_not_available_xpath)
+        alert_message = alert.text[:-2]  # # Remove the "\nx" character to get the pure string for assertion later)
+        self.assertEqual("Products marked with *** are not available in the desired quantity or not in stock!", alert_message) 
+        
     def tearDown(self):
         self.driver.close()
 

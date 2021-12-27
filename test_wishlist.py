@@ -39,7 +39,7 @@ class TestWishlist(unittest.TestCase):
         self.password.send_keys("123456")
         self.login.click()
 
-    def test_add_(self):
+    def test_add_to_wishlist(self):
         self.login()
         self.driver.get(self.all_laptops_page_url)
         self.assertEqual(self.driver.title, "Laptops & Notebooks")
@@ -53,6 +53,7 @@ class TestWishlist(unittest.TestCase):
 
         self.driver.get(self.wishlist_url)
 
+        time.sleep(2)
         # Need to be in wishlist first to extract this data
         self.wishlist_hp_lp3065 = self.driver.find_element_by_xpath(self.wishlist_hp_lp3065_xpath)
 

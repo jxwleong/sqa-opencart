@@ -48,11 +48,11 @@ class TestRegistration(unittest.TestCase):
     def test_open_registration_page(self):
         self.assertEqual("Register Account", self.driver.title)
 
-    @unittest.skip
+    @unittest.skip  # Can't use same email everytime...
     def test_register_given_new_and_correct_credentials_expect_pass(self):
         self.firstname.send_keys("John")
         self.lastname.send_keys("Doe")
-        self.email.send_keys("john.doe123@test.com")
+        self.email.send_keys("john.doe1231@test.com")
         self.telephone.send_keys("60123456789")
         self.password.send_keys("123456")
         self.confirm.send_keys("123456")
@@ -60,6 +60,9 @@ class TestRegistration(unittest.TestCase):
         self.checkbox.click()
         self.continue_.click()
 
+        time.sleep(1)
+
+        self.assertEqual("Your Account Has Been Created!", self.driver.title)
 
     def test_register_given_registered_email_expect_fail(self):
         self.firstname.send_keys("John")
@@ -95,9 +98,10 @@ class TestRegistration(unittest.TestCase):
         except:
             raise Exception("Some alert messages at registration page are missing..")
 
+    # Just make the fields to be tested invalid..
     def test_register_invalid_firstname_lastname(self):
-        self.firstname.send_keys("")
-        self.lastname.send_keys("")
+        self.firstname.send_keys("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        self.lastname.send_keys("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
         self.continue_.click()  
 
         try:
@@ -105,7 +109,53 @@ class TestRegistration(unittest.TestCase):
             self.driver.find_element_by_xpath(self.lastname_error)
 
         except:
-            raise Exception("Some alert messages at registration page are missing..")
+            raise Exception("Some alert messages for first and last name at registration page are missing..")
+
+    # Just make the fields to be tested invalid..
+    def test_register_invalid_email(self):
+        self.email.send_keys("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com")
+        self.continue_.click()  
+
+        try:
+            self.driver.find_element_by_xpath(self.email_error)
+
+        except:
+            raise Exception("Some alert messages for email at registration page are missing..")
+
+    # Just make the fields to be tested invalid..
+    def test_register_invalid_telephone(self):
+        self.telephone.send_keys("1")
+        self.continue_.click()  
+
+        try:
+            self.driver.find_element_by_xpath(self.telephone_error)
+
+        except:
+            raise Exception("Some alert messages for telephone at registration page are missing..")
+
+
+    # Just make the fields to be tested invalid..
+    def test_register_invalid_password(self):
+        self.password.send_keys("xx")
+        self.continue_.click()  
+
+        try:
+            self.driver.find_element_by_xpath(self.password_error)
+
+        except:
+            raise Exception("Some alert messages for password at registration page are missing..")
+
+    # Just make the fields to be tested invalid..
+    def test_register_invalid_password_confirm(self):
+        self.password.send_keys("12345")
+        self.confirm.send_keys("12345678")
+        self.continue_.click()  
+
+        try:
+            self.driver.find_element_by_xpath(self.password_confirm_error)
+
+        except:
+            raise Exception("Some alert messages for password confirm at registration page are missing..")
 
     def test_register_given_all_correct_field_but_didnt_check_agree_expect_fail(self):
         self.firstname.send_keys("John")

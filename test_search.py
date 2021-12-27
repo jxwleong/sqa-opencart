@@ -13,7 +13,7 @@ homepage_url = "https://demo.opencart.com/index.php"
 
 
 
-class TestRegistration(unittest.TestCase):
+class TestSearch(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path="chromedriver.exe")
         self.driver.get(homepage_url)

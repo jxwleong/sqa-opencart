@@ -116,7 +116,7 @@ class TestCheckout(unittest.TestCase):
         except:  # pass, no invalid item in the shopping cart
             pass
         
-        time.sleep(1)  # Need this else wont checkout..
+        time.sleep(2)  # Need this else wont checkout..
         self.checkout_button_url = self.driver.find_element_by_xpath(self.checkout_button_xpath).get_attribute("href")
         self.driver.get(self.checkout_button_url)
         #time.sleep(5)
