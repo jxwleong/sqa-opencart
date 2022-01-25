@@ -19,7 +19,6 @@ import math
 admin_login_page_url = "https://demo.opencart.com/admin/"
 
 
-
 class TestAdminLoginDashboard(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path="chromedriver.exe")

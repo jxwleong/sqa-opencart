@@ -12,7 +12,6 @@ import time
 login_page_url = "https://demo.opencart.com/index.php?route=account/login"
 
 
-
 class TestLogin(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path="chromedriver.exe")

@@ -12,7 +12,6 @@ import time
 homepage_url = "https://demo.opencart.com/index.php"
 
 
-
 class TestSearch(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path="chromedriver.exe")

@@ -11,8 +11,6 @@ import time
 # Constant variable
 registration_page_url = "https://demo.opencart.com/index.php?route=account/register"
 
-
-
 class TestRegistration(unittest.TestCase):
     def is_alert_present(self):
         try:
@@ -48,11 +46,11 @@ class TestRegistration(unittest.TestCase):
     def test_open_registration_page(self):
         self.assertEqual("Register Account", self.driver.title)
 
-    @unittest.skip  # Can't use same email everytime...
+    #@unittest.skip  # Can't use same email everytime...
     def test_register_given_new_and_correct_credentials_expect_pass(self):
         self.firstname.send_keys("John")
         self.lastname.send_keys("Doe")
-        self.email.send_keys("john.doe1231@test.com")
+        self.email.send_keys("john.doe12312111@test.com")
         self.telephone.send_keys("60123456789")
         self.password.send_keys("123456")
         self.confirm.send_keys("123456")

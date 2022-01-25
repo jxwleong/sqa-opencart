@@ -10,8 +10,6 @@ import time
 
 # Constant variable
 homepage_url = "https://demo.opencart.com/index.php"
-#driver = webdriver.Chrome(executable_path="chromedriver.exe")
-#driver.get(homepage_url)
 
 
 class TestNavigation(unittest.TestCase):
@@ -124,4 +122,3 @@ class TestNavigation(unittest.TestCase):
 #driver.close()
 if __name__ == "__main__":
     unittest.main()
-    driver.quit()

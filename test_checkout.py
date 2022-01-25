@@ -11,9 +11,6 @@ import time
 
 # Constant variable
 homepage_url = "https://demo.opencart.com/index.php"
-#driver = webdriver.Chrome(executable_path="chromedriver.exe")
-#driver.get(homepage_url)
-
 
 class TestCheckout(unittest.TestCase):
     def setUp(self):
@@ -144,6 +141,6 @@ class TestCheckout(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
-#driver.close()
+
 if __name__ == "__main__":
     unittest.main()

@@ -12,8 +12,6 @@ import time
 compare_product_page_url = "https://demo.opencart.com/index.php?route=product/compare"
 product_1_url = "https://demo.opencart.com/index.php?route=product/product&path=18&product_id=47"
 product_2_url = "https://demo.opencart.com/index.php?route=product/product&path=18&product_id=44"
-#driver = webdriver.Chrome(executable_path="chromedriver.exe")
-#driver.get(homepage_url)
 
 
 class TestCompare(unittest.TestCase):
@@ -142,7 +140,6 @@ class TestCompare(unittest.TestCase):
         
 
         # Remove product2
-
         remove_product2_url = self.driver.find_element_by_xpath("//*[@id='content']/table/tbody[4]/tr/td[3]/a").get_attribute("href")
         self.driver.get(remove_product2_url)
 
@@ -157,6 +154,6 @@ class TestCompare(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
-#driver.close()
+
 if __name__ == "__main__":
     unittest.main()
